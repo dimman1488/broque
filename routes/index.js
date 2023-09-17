@@ -1,14 +1,7 @@
 const express = require('express');
-const ejs = require('ejs');
 const router = express.Router();
+const pageController = require('../controllers/pageController');
 
-router.get('/', (req, res, next) => {
-    ejs.renderFile('./views/index.ejs', (err, result) => {
-        if (err) {
-            return next(err); 
-        }
-        res.render('layout', {body: result });
-    });
-});
+router.get('/', pageController.getIndexPage);
 
 module.exports = router;

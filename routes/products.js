@@ -1,14 +1,7 @@
 const express = require('express');
-const ejs = require('ejs');
 const router = express.Router();
+const pageController = require('../controllers/productController');
 
-router.get('/', (req, res, next) => {
-    ejs.renderFile('./views/products.ejs', (err, result) => {
-        if (err) {
-            return next(err); 
-        }
-        res.render('layout', {body: result });
-    });
-});
+router.get('/', pageController.getAllProducts);  // changed to getAllProducts
 
 module.exports = router;
