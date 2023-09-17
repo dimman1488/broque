@@ -1,0 +1,1 @@
+// Global JS functions and functionality
