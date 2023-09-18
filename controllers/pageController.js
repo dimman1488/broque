@@ -13,3 +13,8 @@ exports.getContactPage = (req, res, next) => {
 exports.getIndexPage = (req, res, next) => {
     res.render('layout', {content: 'index'});
 };
+
+// Load the Terms and Conditions page
+exports.getTermsPage= (req, res, next) => {
+    res.render('layout', {content: 'terms'});
+};

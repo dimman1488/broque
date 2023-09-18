@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
   price: { 
@@ -21,7 +22,7 @@ const productSchema = new mongoose.Schema({
   category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' }, // Reference to Category model
   excludedFromFreeDelivery: { type: Boolean, default: false },
   imageURL: String,
-  thumbnailURL: String,
+  thumbnail100x100URL: String,
   weightInGrams: Number,
   volumeInLiters: Number,
   flavor: String

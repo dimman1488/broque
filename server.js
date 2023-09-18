@@ -15,6 +15,7 @@ const productsRoute = require('./routes/products');
 const aboutRoute = require('./routes/about'); 
 const contactRoute = require('./routes/contact'); 
 const indexRoute = require('./routes/index'); 
+const termsRoute = require('./routes/terms');
 
 
 app.use(express.urlencoded({ extended: true }));  // To handle URL-encoded data
@@ -37,7 +38,7 @@ app.use('/products', productsRoute);
 app.use('/about', aboutRoute);
 app.use('/contact', contactRoute);
 app.use('/', indexRoute);
-
+app.use('/terms', termsRoute);
 
 // Handle 404 - Keep this as the last route
 app.use((req, res, next) => {
