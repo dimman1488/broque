@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const ImageSchema = require('./common/ImageSchema');
+const {urlValidator} = require('./common/validations');
 
 const productSchema = new mongoose.Schema({
   isActive: { type: Boolean, default: true },
@@ -31,8 +33,13 @@ const productSchema = new mongoose.Schema({
   },
   category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' }, // Reference to Category model
   excludedFromFreeDelivery: { type: Boolean, default: false },
-  imageURL: String,  // Consider validation for URL
-  thumbnail100x100URL: String, // Consider validation for URL
+  imageURL: ImageSchema, 
+  thumbnailImage: ImageSchema,
+  iconImage: ImageSchema,
+  website: {
+    type: String,
+    validate: urlValidator
+  },  
   weightInGrams: {
     type: Number,
     validate: {
