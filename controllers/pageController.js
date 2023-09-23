@@ -1,11 +1,11 @@
 
 // Load the about page
-exports.getAboutPage = (req, res, next) => {
+exports.getAboutPage = (req, res) => {
     res.render('layout', {content: 'about'});
 };
 
 // Load the contact page
-exports.getContactPage = (req, res, next) => {
+exports.getContactPage = (req, res) => {
     res.render('layout', {content: 'contact'});
 };
 
@@ -15,6 +15,6 @@ exports.getIndexPage = (req, res, next) => {
 };
 
 // Load the Terms and Conditions page
-exports.getTermsPage= (req, res, next) => {
+exports.getTermsPage= (req, res) => {
     res.render('layout', {content: 'terms'});
 };

@@ -11,11 +11,11 @@ console.log("Starting server.js...");
 
 
 // Require the XYZ route
+const managerzoneRoute = require('./routes/managerzone');
+const pagesRoute = require('./routes/pages');
 const productsRoute = require('./routes/products');  
-const aboutRoute = require('./routes/about'); 
-const contactRoute = require('./routes/contact'); 
 const indexRoute = require('./routes/index'); 
-const termsRoute = require('./routes/terms');
+
 
 
 app.use(express.urlencoded({ extended: true }));  // To handle URL-encoded data
@@ -34,11 +34,12 @@ mongoose.connect(process.env.MONGO_DB_CONNECTION_STRING, { useNewUrlParser: true
 .catch(err => console.error("Failed to connect to MongoDB", err));
 
 // Use the XYZ route for anything that starts with /XYZ
-app.use('/products', productsRoute);
-app.use('/about', aboutRoute);
-app.use('/contact', contactRoute);
+app.use('/', pagesRoute);
 app.use('/', indexRoute);
-app.use('/terms', termsRoute);
+app.use('/products', productsRoute);
+app.use('/managerzone', managerzoneRoute);
+
+
 
 // Handle 404 - Keep this as the last route
 app.use((req, res, next) => {
@@ -56,8 +57,3 @@ app.listen(PORT, () => {
 }).on('error', (err) => {
     console.error('Error starting server:', err);
 });
-
-
-
-
-

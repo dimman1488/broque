@@ -1,0 +1,19 @@
+<!-- File: views/managerzone/layout.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... -->
+    <link rel="stylesheet" href="/css/admin-styles.css">
+</head>
+<body>
+
+<%- include('partials/admin-header') %>
+<% console.log('Content: ', content); %>
+<%- include(content) %>
+<%- include('partials/admin-footer') %>
+
+<script src="/js/admin-script.js"></script>
+
+</body>
+</html>
