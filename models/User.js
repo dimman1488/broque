@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {emailValidator, phoneValidator, onlyContainLettersValidator, onlyEnglishLettersValidator} = require('./common/validations');
 const AddressSchema = require('./Address');
 
 const userSchema = new mongoose.Schema({
@@ -6,12 +7,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/, 'Var god och fyll i en giltig mailadress']
+        validate: emailValidator
     },
     phone: {
         type: String,
         required: true,
-        match: [/\(?\d{1,4}\)?-?\d{5,8}/, 'Ogiltigt telefonnummer!']
+        validate: phoneValidator
     },
     username: {
         type: String,
@@ -19,19 +20,18 @@ const userSchema = new mongoose.Schema({
         unique: true,
         minlength: 3,
         maxlength: 20,
-        match: [/^[a-zA-Z0-9]+$/, 'Användarnamn kan endast innehålla alfanumeriska tecken.']
+        validate: onlyEnglishLettersValidator
     },
     firstName: {
         type: String,
         required: true,
         minlength: 2,
-        match: [/^[a-zA-Z]+$/, 'Förnamn kan endast innehålla bokstäver.']
+        validate: onlyContainLettersValidator
     },
     lastName: {
         type: String,
         required: true,
-        minlength: 2,
-        match: [/^[a-zA-Z]+$/, 'Efternamn kan endast innehålla bokstäver.']
+        validate: onlyContainLettersValidator
     },
     addresses: [AddressSchema],
     frequentlyBought: [{

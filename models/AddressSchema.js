@@ -1,28 +1,32 @@
 const mongoose = require('mongoose');
+const {anyLettersAndNumbersValidator, postalNumberValidator, onlyContainLettersValidator, onlyEnglishLettersValidator} = require('./common/validations');
+
 
 const AddressSchema = new mongoose.Schema({
     name: {
         type: String,
-        match: [/^[a-zA-Z\s\-]+$/, 'Ogiltigt namnformat.']
+        required: true,
+        validator: onlyContainLettersValidator
     },  
     streetAddress: {
         type: String,
         required: true,
-        match: [/^[a-zA-Z0-9\s\-]+$/, 'Ogiltigt gatuadressformat.']
+        validator: anyLettersAndNumbersValidator
     },
     postalCode: {
         type: String,
         required: true,
-        match: [/^\d{5}$|^\d{2} \d{3}$|^\d{3} \d{2}$/, 'Ogiltigt postnummerformat.']
+        validator: postalNumberValidator
     },
     city: {
         type: String,
         required: true,
-        match: [/^[a-zA-Z\s\-]+$/, 'Ogiltigt stadformat.']
+        validator: onlyContainLettersValidator
     },         
     county: {
         type: String,
-        match: [/^[a-zA-Z\s\-]+$/, 'Ogiltigt länsformat.']
+        required: true,
+        validator: onlyContainLettersValidator
     },                                 
     isDefault: { type: Boolean, default: false }    
 });

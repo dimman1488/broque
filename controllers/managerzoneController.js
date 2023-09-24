@@ -3,12 +3,6 @@ exports.dashboard = (req, res) => {
     res.render('managerzone/layout', { content: '../managerzone/dashboard' });
 }; 
 
-// exports.dashboard = (req, res) => {
-//     // Render the main dashboard page
-//     res.render('managerzone/dashboard');
-// };
-
-
 exports.manageCategories = (req, res) => {
     // Render the manage products page
     res.render('managerzone/layout', { content: '../managerzone/manage-categories'});
