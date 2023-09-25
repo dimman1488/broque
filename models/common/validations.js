@@ -42,20 +42,30 @@ exports.onlyContainLettersValidator = {
     validator: function(value) {
         // Validate that the string only contains letters
         return /^\p{L}+$/gu.test(value);
-    }
+    },
+    message: 'The string should only contain letters.'
 }
 
 exports.onlyEnglishLettersValidator = {
     validator: function(value) {
         // Validate that the string only contains letters
         return /^[a-zA-Z]+$/.test(value);
-    }
+    },
+    message: 'The string should only containg English letters.'
 }
 
 exports.anyLettersAndNumbersValidator = {
     validator: function(value) {
          // This regex allows letters, numbers, spaces, hyphens, and slashes
          return /^[\p{L}0-9\s\-\/]+$/gu.test(value);
+        },
+    message: 'Value should be a non-negative number.'
+}
+
+exports.isNonNegative = {
+    validator: function(value) {
+         // Checks so that  a number isn't negative
+         return value > 0;
     },
     message: 'Invalid address format'
 }

@@ -1,22 +1,19 @@
 require('dotenv').config();
+
 const express = require('express');
 const ejs = require('ejs');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 console.log("Starting server.js...");
-
-
 
 // Require the XYZ route
 const managerzoneRoute = require('./routes/managerzone');
 const pagesRoute = require('./routes/pages');
 const productsRoute = require('./routes/products');  
 const indexRoute = require('./routes/index'); 
-
-
 
 app.use(express.urlencoded({ extended: true }));  // To handle URL-encoded data
 app.use(express.json());  // To handle JSON data
@@ -26,7 +23,6 @@ app.set('view engine', 'ejs');
 
 // Serve static files (CSS, JS, images) from the 'public' directory
 app.use(express.static('public'));
-
 
 // Set up basic MongoDB connection
 mongoose.connect(process.env.MONGO_DB_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -38,8 +34,6 @@ app.use('/', pagesRoute);
 app.use('/', indexRoute);
 app.use('/products', productsRoute);
 app.use('/managerzone', managerzoneRoute);
-
-
 
 // Handle 404 - Keep this as the last route
 app.use((req, res, next) => {

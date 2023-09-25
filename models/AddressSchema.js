@@ -1,32 +1,32 @@
 const mongoose = require('mongoose');
-const {anyLettersAndNumbersValidator, postalNumberValidator, onlyContainLettersValidator, onlyEnglishLettersValidator} = require('./common/validations');
+const { anyLettersAndNumbersValidator, postalNumberValidator, onlyContainLettersValidator } = require('./common/validations');
 
 
 const AddressSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        validator: onlyContainLettersValidator
+        validate: onlyContainLettersValidator
     },  
     streetAddress: {
         type: String,
         required: true,
-        validator: anyLettersAndNumbersValidator
+        validate: anyLettersAndNumbersValidator
     },
     postalCode: {
         type: String,
         required: true,
-        validator: postalNumberValidator
+        validate: postalNumberValidator
     },
     city: {
         type: String,
         required: true,
-        validator: onlyContainLettersValidator
+        validate: onlyContainLettersValidator
     },         
     county: {
         type: String,
         required: true,
-        validator: onlyContainLettersValidator
+        validate: onlyContainLettersValidator
     },                                 
     isDefault: { type: Boolean, default: false }    
 });

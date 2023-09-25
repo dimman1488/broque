@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const ImageSchema = require('./common/ImageSchema');
-const {urlValidator} = require('./common/validations');
+const {urlValidator, isNonNegative} = require('./common/validations');
 
 const productSchema = new mongoose.Schema({
   isActive: { type: Boolean, default: true },
@@ -12,12 +12,7 @@ const productSchema = new mongoose.Schema({
   price: { 
     type: Number, 
     required: true, 
-    validate: {
-      validator: function(value) {
-        return value > 0;
-      },
-      message: 'Price should be a positive number.'
-    }
+    validate: isNonNegative
   },
   tags: [{
     type: String,
@@ -42,21 +37,11 @@ const productSchema = new mongoose.Schema({
   },  
   weightInGrams: {
     type: Number,
-    validate: {
-      validator: function(value) {
-        return value >= 0;
-      },
-      message: 'Weight should be a non-negative number.'
-    }
+    validate: isNonNegative
   },
   volumeInLiters: {
     type: Number,
-    validate: {
-      validator: function(value) {
-        return value >= 0;
-      },
-      message: 'Volume should be a non-negative number.'
-    }
+    validate: isNonNegative
   },
   flavor: {
     type: String,
