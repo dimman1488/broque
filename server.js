@@ -11,6 +11,7 @@ console.log("Starting server.js...");
 
 // Require the XYZ route
 const managerzoneRoute = require('./routes/managerzone');
+const managerauthRoute = require('./routes/managerauth');
 const pagesRoute = require('./routes/pages');
 const productsRoute = require('./routes/products');  
 const indexRoute = require('./routes/index'); 
@@ -34,6 +35,7 @@ app.use('/', pagesRoute);
 app.use('/', indexRoute);
 app.use('/products', productsRoute);
 app.use('/managerzone', managerzoneRoute);
+app.use('/managerauth', managerauthRoute);
 
 // Handle 404 - Keep this as the last route
 app.use((req, res, next) => {

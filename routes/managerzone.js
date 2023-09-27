@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const managersoneController = require('../controllers/managerzoneController');
+const managerzoneController = require('../controllers/managerzoneController');
 
-router.get('/', managersoneController.dashboard);
-router.get('/categories', managersoneController.manageCategories);
-router.get('/products', managersoneController.manageProducts);
-router.get('/groups', managersoneController.manageGroups);
-router.get('/users', managersoneController.manageUsers);
-router.get('/admins', managersoneController.manageAdmins);
-router.get('/orders', managersoneController.manageOrders);
+router.get('/', managerzoneController.dashboard);
+router.get('/categories', managerzoneController.manageCategories);
+router.get('/products', managerzoneController.manageProducts);
+router.get('/groups', managerzoneController.manageGroups);
+router.get('/users', managerzoneController.manageUsers);
+router.get('/admins', managerzoneController.manageAdmins);
+router.get('/orders', managerzoneController.manageOrders);
 
 module.exports = router;
