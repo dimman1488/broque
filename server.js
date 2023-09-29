@@ -6,7 +6,6 @@ const mongoose      = require('mongoose');
 const passport      = require('passport');                  // <---
 const localStrategy = require('passport-local').Strategy;   // <---
 const bcrypt        = require('bcrypt');                    // <---
-const handlebars    = require('express-handlebars');;        // <---
 const ejs           = require('ejs');
 const path          = require('path');
 
@@ -17,11 +16,6 @@ const PORT          = process.env.PORT || 3000;
 mongoose.connect(process.env.MONGO_DB_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => console.log("Connected to MongoDB"))
 .catch(err => console.error("Failed to connect to MongoDB", err));
-
-//Middleware
-const hbs = handlebars.create({ extname: '.hbs'});  // <---
-app.engine('hbs', hbs.engine);                      // <---
-app.set('view engine', 'hbs');                      // <---
 
 // Serve static files (CSS, JS, images) from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public'))); // <--- same (but better) than "app.use(express.static(__dirname + '/public'));", which is same, but better than "app.use(express.static('public'));"

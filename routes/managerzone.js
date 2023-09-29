@@ -1,6 +1,7 @@
+const managerzoneController = require('../controllers/managerzoneController');
 const express = require('express');
 const router = express.Router();
-const managerzoneController = require('../controllers/managerzoneController');
+
 
 router.get('/', managerzoneController.dashboard);
 router.get('/categories', managerzoneController.manageCategories);
