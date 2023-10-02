@@ -1,7 +1,10 @@
+
+//config/adminPassport.js
+
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-const Admin = require('../models/Admin');
+const Admin = require('../../models/Admin');
 
 passport.serializeUser(function(admin, done) {
     done(null, admin.id);
@@ -9,7 +12,7 @@ passport.serializeUser(function(admin, done) {
 
 passport.deserializeUser(async function(id, done) {
     try {
-        const admin = await User.findById(id);
+        const admin = await Admin.findById(id);
         done(null, admin);
     } catch (err) {
         done(err);
@@ -18,10 +21,10 @@ passport.deserializeUser(async function(id, done) {
 
 passport.use(new localStrategy(
     { usernameField: 'email' },
-    async function(email, password, done) {  // Note: It's "password", not "passwerd"
+    async function(email, password, done) { 
     try {
-        const user = await Admin.findOne({ email: email });
-        if (!user) return done(null, false, { message: 'Incorrect username.' });
+        const admin = await Admin.findOne({ email: email });
+        if (!admin) return done(null, false, { message: 'Incorrect username.' });
 
         bcrypt.compare(password, admin.password, function(err, res) {
             if (err) return done(err);

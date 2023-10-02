@@ -11,25 +11,25 @@ const adminSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        required: true,
+        required: false,
         validate: phoneValidator
     },
     firstName: {
         type: String,
-        required: true,
+        required: false,
         minlength: 2,
         validate: onlyContainLettersValidator
     },
     lastName: {
         type: String,
-        required: true,
+        required: false,
         minlength: 2,
         validate: onlyContainLettersValidator
     },
     password: {
         type: String,
         required: true,
-        minlength: 8,
+        minlength: 4,
     },
     isAdmin: {
         type: Boolean,

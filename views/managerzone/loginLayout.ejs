@@ -1,17 +1,16 @@
-<!-- File: views/managerzone/layout.ejs -->
-
+<!-- File: views/managerzone/loginLayout.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- ... -->
-    <link rel="stylesheet" href="/css/admin-styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+
+    <link rel="stylesheet" href="/loginLayout.css" />
 </head>
 <body>
-
-<h1>LOGIN</h1>
-<%- include(content) %>
-
-<script src="/js/admin-script.js"></script>
-
+    <div class="app">
+        <%- include(content) %>   
+    </div>
 </body>
 </html>

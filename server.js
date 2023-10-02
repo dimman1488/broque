@@ -1,11 +1,12 @@
+//Server.js
 require('dotenv').config();
 
 const express       = require('express');
-const session       = require('express-session');           // <---
+const session       = require('express-session');         
 const mongoose      = require('mongoose');
-const passport      = require('passport');                  // <---
-const localStrategy = require('passport-local').Strategy;   // <---
-const bcrypt        = require('bcrypt');                    // <---
+const passport      = require('passport');                  
+//const localStrategy = require('passport-local').Strategy;  
+const bcrypt        = require('bcrypt');                   
 const ejs           = require('ejs');
 const path          = require('path');
 
@@ -17,45 +18,39 @@ mongoose.connect(process.env.MONGO_DB_CONNECTION_STRING, { useNewUrlParser: true
 .then(() => console.log("Connected to MongoDB"))
 .catch(err => console.error("Failed to connect to MongoDB", err));
 
-// Serve static files (CSS, JS, images) from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public'))); // <--- same (but better) than "app.use(express.static(__dirname + '/public'));", which is same, but better than "app.use(express.static('public'));"
+app.use(express.static(path.join(__dirname, 'public'))); 
+
+app.set('view engine', 'ejs');
+
+app.use(express.urlencoded({ extended: true }));    
+app.use(express.json());          
 
 app.use(session({
-    secret: "verygoodsecret",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true
 }));
 
-// Set EJS as the templating engine
-app.set('view engine', 'ejs');
+require('./config/passport/adminPassport');
 
-app.use(express.urlencoded({ extended: true }));    // To handle URL-encoded data
-app.use(express.json());                            // To handle JSON data
-
-//passport.js
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser(function (user, done) {
-    done(null, user.id);
-});
-
-passport.deserializeUser(function (id, done) {
-    // Set up user model
-});
-
 // Require the XYZ route
-const managerzoneRoute  = require('./routes/managerzone');
-const managerauthRoute  = require('./routes/managerauth');
+const adminSetupRoute   = require('./routes/adminSetup');
+const managerzoneRoute  = require('./routes/managerZone');
+const managerauthRoute  = require('./routes/managerAuth');
 const pagesRoute        = require('./routes/pages');
 const productsRoute     = require('./routes/products');  
 const indexRoute        = require('./routes/index'); 
+
 // Use the XYZ route for anything that starts with /XYZ
 app.use('/', pagesRoute);
 app.use('/', indexRoute);
 app.use('/products', productsRoute);
 app.use('/managerzone', managerzoneRoute);
 app.use('/managerauth', managerauthRoute);
+app.use('/managerauth/admin-setup', adminSetupRoute);
 
 // Handle 404 - Keep this as the last route
 app.use((req, res, next) => {
